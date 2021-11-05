@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const Restaurant = require('./models/restaurant')
 
 
+
 // app.get('/search', (req, res) => {
 //   const keyword = req.query.keyword
 //   const restaurants = restaurantList.results.filter(restaurant =>
@@ -39,13 +40,25 @@ const Restaurant = require('./models/restaurant')
 //   res.render('show', { restaurant })
 // })
 
-
-
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
 })
 
-
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('edit', {
+      restaurant: restaurant,
+      category: restaurant.category,
+      helpers: {
+        isValueSelected: function (selectedValue, value) {
+          return selectedValue === value;
+        }
+      }
+    }))
+    .catch(error => console.log(error))
+})
 
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
