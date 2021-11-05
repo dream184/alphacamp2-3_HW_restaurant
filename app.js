@@ -39,17 +39,27 @@ const Restaurant = require('./models/restaurant')
 //   res.render('show', { restaurant })
 // })
 
+
+
 app.get('/restaurants/new', (req, res) => {
   res.render('new')
+})
+
+
+
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant: restaurant }))
+    .catch(error => console.log(error))
 })
 
 app.post('/restaurants/', (req, res) => {
   const { name, name_en, category, image, location, phone, google_map, description }  = req.body
   Restaurant.create({ name, name_en, category, image, location, phone, google_map, description })
     .then(() => res.redirect('/'))
-    .catch(error =>
-      console.log(error)
-    )
+    .catch(error => console.log(error))
 })
 
 app.get('/', (req, res) => {
