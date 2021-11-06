@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center mt-4">
   <div class="form-container ">
-    <form action="/restaurants/{{restaurant._id}}/edit" method="post">
+    <form action="/restaurants/{{restaurant._id}}?_method=PUT" method="post">
       <div class="input-container">
         <label for="name">餐廳中文名:</label>
         <input name="name" id="name" type="text" maxlenth="20" placeholder="請輸入中文名稱" value="{{restaurant.name}}">
