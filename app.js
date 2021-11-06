@@ -22,22 +22,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const Restaurant = require('./models/restaurant')
 
-
-
 // app.get('/search', (req, res) => {
 //   const keyword = req.query.keyword
 //   const restaurants = restaurantList.results.filter(restaurant =>
 //     restaurant.name.toLowerCase().includes(keyword.toLowerCase()) 
 //   )
 //   res.render('index', { restaurantList: restaurants, keyword })
-// })
-
-// app.get('/restaurants/:id', (req, res) => {
-//   const restaurantId = req.params.id
-//   const restaurant = []
-//   const foundedRestaurant = restaurantList.results.find(restaurant => restaurant.id === Number(restaurantId))
-//   restaurant.push(foundedRestaurant)
-//   res.render('show', { restaurant })
 // })
 
 app.get('/restaurants/new', (req, res) => {
@@ -80,6 +70,14 @@ app.post('/restaurants/:id/edit', (req, res) => {
     })
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.warn(error))
+})
+
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurants/:id', (req, res) => {
