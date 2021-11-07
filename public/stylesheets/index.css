@@ -21,7 +21,6 @@ header {
 }
 
 .search-bar .search-bar-outer {
-  margin: 0 auto;
   max-width: 680px;
   background-color: #fce2cf;
   border-radius: 8px;
@@ -90,6 +89,7 @@ header {
   .restaurant-show-title {
     font-size: 2rem;
   }
+
 }
 
 @media screen and (max-width: 575px) {
@@ -97,5 +97,6 @@ header {
   .card img{
     height: auto;
   }
-  
+
+
 }

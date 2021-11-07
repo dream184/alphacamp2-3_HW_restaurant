@@ -1,8 +1,24 @@
-<div class="container search-bar">
-  <div class="search-bar-outer">
+<!-- <div class="container search-bar">
+  <div class="row justify-content-around">
+    <div class="search-bar-outer col-3">
+      <div class="search-bar-inner">
+        <form action="/search">
+          <h4 class="mb-2">尋找餐廳：</h4>
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+              value="{{keyword}}" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
+
+<div class="container search-bar mt-3">
+  <div class="row justify-content-around align-items-center">
     <div class="search-bar-inner">
       <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
             value="{{keyword}}" aria-describedby="search-button">
@@ -12,15 +28,26 @@
         </div>
       </form>
     </div>
+
+    <div class="sort-container col-3">
+      <div class="sort-downdown text-center">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          餐廳排序
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" href="/sort/a-z">A -> Z</a></li>
+          <li><a class="dropdown-item" href="/sort/z-a">Z -> A</a></li>
+          <li><a class="dropdown-item" href="/sort/category">類別</a></li>
+          <li><a class="dropdown-item" href="/sort/location">地區</a></li>
+        </ul>
+      </div>      
+    </div>
   </div>
 </div>
 
 <!-- restaurant list -->
-<div class="container mt-3">
-  <div class="text-right px-5 mb-2">
-    <a href="/restaurants/new" class="btn btn-success pr-10">Create a restaurant</a>
-  </div>
-  
+<div class="container mt-3"> 
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
@@ -44,12 +71,14 @@
             </div>
           </div>
         </a>
-        <div class="button-container text-right mb-3">
-          <a href="/restaurants/{{this._id}}/edit" class="btn btn-primary">Edit</a>
-          <a href="/restaurants/{{this._id}}" class="btn btn-success">Detail</a>
-          <form action="/restaurants/{{this._id}}?_method=DELETE" method="post" style="display:inline">
-            <button type="submit" class="btn btn-outline-danger">Delete</button>
-          </form>     
+        <div class="button-container mb-3">
+          <div class="row mx-auto">
+            <a href="/restaurants/{{this._id}}/edit" class="edit col-4 btn btn-primary text-center px-0">Edit</a>
+            <a href="/restaurants/{{this._id}}" class="detail col-4 btn btn-success text-center px-0">Detail</a>
+            <form class="delete col-4 px-0 text-center" action="/restaurants/{{this._id}}?_method=DELETE" method="post" style="display:inline">
+              <button type="submit" class="delete-button btn btn-outline-danger w-100 px-0">Delete</button>
+            </form>              
+          </div>
         </div>
         {{/each}}
       </div>

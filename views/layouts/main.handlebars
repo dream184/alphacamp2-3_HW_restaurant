@@ -6,19 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>restaurant</title>
   <link rel="stylesheet" href="/stylesheets/normalize.css">
-  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
   <header>
-    <!-- navigation -->
     <nav class="navbar navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
-            width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
-          我的餐廳清單
+            width="30" height="30" class="d-inline-block align-top" alt="找餐廳">
+          找餐廳
         </a>
+
+        <div class="text-right px-5">
+          <a href="/restaurants/new" class="btn btn-success pr-10">Create a restaurant</a>
+        </div>
       </div>
     </nav>
   
@@ -27,8 +30,7 @@
 
   {{{body}}}
 
-  <script src="/javascripts/jquery-3.3.1.js"></script>
-  <script src="/javascripts/popper.js"></script>
+  <script src="/javascripts/popper.min.js"></script>
   <script src="/javascripts/bootstrap.min.js"></script>
   <script src="/javascripts/fontawesome.js"></script>
 </body>
