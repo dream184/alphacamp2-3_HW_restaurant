@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
+const session = require('express-session')
+const usePassport = require('./config/passport')
 
 const routes = require('./routes')
 const port = 3000
@@ -12,6 +14,13 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+usePassport(app)
+
+app.use(session({
+  secret: 'codingfun',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
