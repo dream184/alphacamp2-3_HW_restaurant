@@ -7,8 +7,4 @@ router.use('/', home)
 router.use('/restaurants', restaurant)
 
 
-
-
-
-
 module.exports = router

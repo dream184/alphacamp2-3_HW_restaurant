@@ -17,6 +17,14 @@ router.get('/sort/:order', (req, res) => {
     .catch(error => console.error('error'))
 })
 
+router.get('/search', (req, res) => {
+  const keyword = req.query.keyword
+  Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i'} })
+    .lean()
+    .then(restaurants => res.render('index', { restaurantList: restaurants }))
+    .catch(error => console.log('error'))
+})
+
 router.get('/', (req, res) => {
   Restaurant.find()
     .lean()
