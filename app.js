@@ -5,9 +5,12 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const flash = require('connect-flash')
 const usePassport = require('./config/passport')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const routes = require('./routes')
-const port = 3000
+const port = process.env.PORT
 require('./config/mongoose')
 
 const app = express()
@@ -16,7 +19,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(session({
-  secret: 'codingfun',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
