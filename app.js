@@ -14,13 +14,14 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-// usePassport(app)
-
 app.use(session({
   secret: 'codingfun',
   resave: false,
   saveUninitialized: true
 }))
+
+usePassport(app)
+
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
