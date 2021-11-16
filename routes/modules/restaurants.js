@@ -8,7 +8,8 @@ router.get('/new', (req, res) => {
 
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
-  Restaurant.findById(id)
+  const userId = req.user._id
+  Restaurant.findOne({ id, userId })
     .lean()
     .then((restaurant) => res.render('edit', {
       restaurant: restaurant,
@@ -22,11 +23,12 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.put('/:id', (req, res) => {
-  const id = req.params.id
+router.put('/:id', (req, res) => { 
+  const userId = req.user._id
+  const id = req.params
   const { name, name_en, category, image, location, phone, google_map, description } = req.body
   
-  Restaurant.findById(id)
+  Restaurant.findOne(id, userId)
     .then(restaurant => {
       restaurant.name = name
       restaurant.name_en = name_en
@@ -36,6 +38,7 @@ router.put('/:id', (req, res) => {
       restaurant.phone = phone
       restaurant.google_map = google_map
       restaurant.description = description
+      restaurant.userId = userId
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -44,23 +47,28 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  Restaurant.findById(id)
+  const userId = req.user._id
+  Restaurant.findOne({ id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 router.get('/:id', (req, res) => {
+  console.log(req.user)
   const id = req.params.id
-  Restaurant.findById(id)
+  const userId = req.user._id
+  
+  Restaurant.findOne({ id, userId })
     .lean()
     .then((restaurant) => res.render('show', { restaurant: restaurant }))
     .catch(error => console.log(error))
 })
 
 router.post('/', (req, res) => {
+  const userId = req.user._id
   const { name, name_en, category, image, location, phone, google_map, description }  = req.body
-  Restaurant.create({ name, name_en, category, image, location, phone, google_map, description })
+  Restaurant.create({ name, name_en, category, image, location, phone, google_map, description, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })

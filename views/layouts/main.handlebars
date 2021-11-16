@@ -20,7 +20,12 @@
         </a>
 
         <div class="text-right px-5">
+          {{#if isAuthenticated}}
+          <a href="/users/logout" class="btn btn-danger pr-10">Logout</a>
           <a href="/restaurants/new" class="btn btn-success pr-10">Create a restaurant</a>
+          {{else}}
+          <a href="/users/login" class="btn btn-success pr-10">Login</a>
+          {{/if}}         
         </div>
       </div>
     </nav>

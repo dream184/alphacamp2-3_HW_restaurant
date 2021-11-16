@@ -19,15 +19,19 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
-
-usePassport(app)
-
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(routes)
 
+usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated
+  res.locals.user = req.user
+  next()
+})
+
+app.use(routes)
 app.listen(port, (req, res) => {
   console.log(`Express is listening on http://localhost:${port}`)
 })
