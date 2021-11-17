@@ -35,7 +35,7 @@
 `在 Terminal 輸入 npm install 指令`
 4. 安裝 nodemon 套件
 `在 Terminal 輸入 npm install nodemon 指令`
-5.設定環境變數
+5. 設定環境變數
 `將根目錄的.env.example改成.env`
 6. 建立種子資料
 `npm run seed`
