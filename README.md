@@ -44,7 +44,6 @@
 8. 當 terminal 出現以下字樣，表示伺服器與資料庫已啟動並成功連結
 `Express is listening on http://localhost:3000`
 9. 輸入 SEED_USER 帳號密碼即可登入
-`
     name: 'user1'
     email: 'user1@example.com'
     password: '12345678'
@@ -52,7 +51,6 @@
     name: 'user1'
     email: 'user2@example.com'
     password: '12345678'
-`
 
 ## Contributor - 專案開發人員
 * [李仕堡](https://github.com/dream184)
