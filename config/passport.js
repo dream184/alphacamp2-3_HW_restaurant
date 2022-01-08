@@ -12,7 +12,7 @@ module.exports = app => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false, req.flash('warning_msg' , '這個 Email 尚未註冊!'))
+          return done(null, false, req.flash('warning_msg', '這個 Email 尚未註冊!'))
         }
         return bcrypt.compare(password, user.password)
           .then(isMatch => {
@@ -20,7 +20,7 @@ module.exports = app => {
               return done(null, false, req.flash('warning_msg', 'Email 或 密碼 錯誤!'))
             }
             return done(null, user)
-          })       
+          })
       })
       .catch(err => done(err, false))
   }))
@@ -48,7 +48,6 @@ module.exports = app => {
           .catch(error => done(error, false))
       })
   }))
-
 
   passport.serializeUser((user, done) => {
     done(null, user.id)

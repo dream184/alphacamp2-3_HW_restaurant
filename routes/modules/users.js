@@ -17,11 +17,11 @@ router.post('/login', passport.authenticate('local', {
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
-  if (!name || !email || !password || !confirmPassword) {
-    errors.push({message: '所有欄位都是必填!'})
+  if (!email || !password || !confirmPassword) {
+    errors.push({ message: ' Email 、 Password 和 confirmPassword 都是必填!' })
   }
   if (password !== confirmPassword) {
-    errors.push({message: '密碼與確認密碼不符!'})
+    errors.push({ message: '密碼與確認密碼不符!' })
   }
   if (errors.length) {
     return res.render('register', {
@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email })
     .then((user) => {
       if (user) {
-        errors.push({message: '這個 Email 已經註冊過了。'})
+        errors.push({ message: '這個 Email 已經註冊過了。' })
         res.render('register', {
           errors,
           name,
@@ -50,7 +50,7 @@ router.post('/register', (req, res) => {
             name,
             email,
             password: hash
-          })) 
+          }))
           .then(() => res.redirect('/'))
           .catch(err => console.log(err))
       }
