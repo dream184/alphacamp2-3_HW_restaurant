@@ -52,4 +52,5 @@ db.once('open', () => {
       .catch(err => console.log(err))
   }
   console.log('added restaurants to db')
+  process.exit()
 })
